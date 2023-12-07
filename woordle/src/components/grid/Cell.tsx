@@ -1,4 +1,4 @@
-type CharStatus = "absent" | "present" | "correct";
+// type CharStatus = "absent" | "present" | "correct";
 
 type Props = {
   value?: string;
@@ -10,9 +10,6 @@ type Props = {
 export const Cell = ({
   value,
   status,
-  isRevealing,
-  isCompleted,
-  position = 0
 }: Props) => {
   
   const className = "cell " + status;

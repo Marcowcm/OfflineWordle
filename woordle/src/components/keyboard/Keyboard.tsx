@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Key } from "./Key";
 import { letterState } from "../gameLogics";
 type Props = {
@@ -39,4 +38,3 @@ export const Keyboard = ({ onChar, onEnter, onDelete }: Props) => {
     </div>
   );
 };
-//# sourceMappingURL=Keyboard.js.map
