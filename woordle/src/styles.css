@@ -1,0 +1,123 @@
+main {
+  text-align: center;
+  vertical-align: center;
+  line-height: 100vh
+}
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  color: black;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 3px;
+  border: darkgray 1px solid;
+  border-radius: 3px;
+  display: inline-flex;
+}
+.grid {
+  justify-content: center;
+  align-items: center;
+  display: grid;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.absent {
+  background-color: darkgray;
+  color: white;
+  align-items: center;
+}
+.correct {
+  background-color: green;
+  color: white;
+}
+.present {
+  background-color: rgb(255, 196, 1);
+  color: white;
+}
+.container {
+  justify-content: center;
+  align-items: center;
+}
+.keyboard {
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+.keyboard .row {
+  justify-content: center;
+  align-items: center;
+}
+.keyboard button.key {
+  font-size: 20pt;
+  height: 30pt;
+  min-width: 30pt;
+  background-color: white;
+  color: black;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: darkgray 1px solid;
+  border-radius: 3px;
+  display: inline-flex;
+}
+.keyboard button.key.absent {
+  background-color: darkgray;
+  color: white;
+}
+.keyboard button.key.present {
+  background-color: rgb(255, 196, 1);
+  color: white;
+}
+.keyboard button.key.correct {
+  background-color: green;
+  color: white;
+}
+.keyboard button:hover {
+  background-color: lightgray;
+  color: black;
+}
+
+.modal {
+  display: true; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+.modal-action {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.modal-action:hover,
+.modal-action:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 600px) {
+}
