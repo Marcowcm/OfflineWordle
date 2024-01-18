@@ -1,5 +1,7 @@
 import { Key } from "./Key";
 import { letterState } from "../gameLogics";
+import { useEffect } from 'react'
+
 type Props = {
   onChar: (value: string) => void;
   onEnter: () => void;
@@ -15,6 +17,25 @@ export const Keyboard = ({ onChar, onEnter, onDelete }: Props) => {
       onChar(value);
     }
   };
+  useEffect(() => {
+    const listener = (e: KeyboardEvent) => {
+      if (e.key === "Enter") {
+        onEnter();
+      } else if (e.key === "Backspace") {
+        onDelete();
+      } else {
+        const k = e.key.toUpperCase();
+        if (k.length === 1 && k >= "A" && k <= "Z") {
+          onChar(k);
+        }
+      }
+    };
+    window.addEventListener("keyup", listener);
+    return () => 
+    {
+      window.removeEventListener("keyup",listener)
+    }
+  }, [onEnter,onDelete,onChar]);
   return (
     <div className="keyboard">
       

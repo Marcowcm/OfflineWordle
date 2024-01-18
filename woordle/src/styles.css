@@ -101,22 +101,32 @@ main {
 .modal-content {
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
+  padding: 10px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
+  border-radius: 5px;
 }
 .modal-action {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
+  color: #666;
+  background-color: rgba(0, 0, 0, 0);
+  /* float: inline-end; */
+  font-size: 20px;
+  padding: 10px;
   font-weight: bold;
+  border: 1px solid #888;
+  border-radius: 5px;
 }
 
 .modal-action:hover,
 .modal-action:focus {
   color: black;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid black;
   text-decoration: none;
   cursor: pointer;
+}
+.alert{
+  color: crimson;
 }
 
 @media only screen and (min-width: 600px) {

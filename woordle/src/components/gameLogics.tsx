@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import { getWord , getWordOnline, isValidWord } from "./words";
+import { getWord, isValidWord } from "./words";
 
 export const getStatus = (solution:string , guess:string) => {
   const ref = Array.from(solution.split(""));

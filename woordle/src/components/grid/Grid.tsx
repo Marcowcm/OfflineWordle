@@ -35,10 +35,10 @@ export const Grid = ({
           <EmptyRow solution={solution} key={i} />
         ))}
 
-        <div>
+        {/* <div>
           Answer: {solution} | Length: {solution.length}
           Tries = {guesses.length}
-        </div>
+        </div> */}
 
       </div>
     </>

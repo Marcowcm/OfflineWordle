@@ -28,7 +28,7 @@ export default function App() {
   const onChar = useCallback((value: string) => {
     if (
       solution.length > currentGuess.length &&
-      guesses.length < solution.length
+      guesses.length < solution.length + 1
     ) {
       setCurrentGuess(`${currentGuess}${value}`);
     }
@@ -42,6 +42,7 @@ export default function App() {
   }, [currentGuess]);
 
   const onEnter = useCallback(() => {
+    console.log('OnEnter guess:'+currentGuess);
     if (isWon || isLost) {
       return;
     }
@@ -60,7 +61,7 @@ export default function App() {
         } else {
           /* WRONG, next guess */
           setCurrentGuess("");
-          if (guesses.length === solution.length - 1) {
+          if (guesses.length === solution.length) {
             setIsLost(true);
           }
         }
@@ -101,22 +102,6 @@ export default function App() {
     setAlert(0);
   },[])
 
-  /* keyListener */
-  useEffect(() => {
-    const listener = (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
-        onEnter();
-      } else if (e.key === "Backspace") {
-        onDelete();
-      } else {
-        const k = e.key.toUpperCase();
-        if (k.length === 1 && k >= "A" && k <= "Z") {
-          onChar(k);
-        }
-      }
-    };
-    window.addEventListener("keyup", listener);
-  }, [onEnter,onDelete,onChar,currentGuess,solution]);
 
   /* onKeyPress KeyId keyValue */
   useEffect(() => {setSolution(getNewWord(level));
@@ -127,18 +112,13 @@ export default function App() {
   
   return (
     <div className="App">
-      <h1>Wordle</h1>
-      <div>
-        <button onClick={newGame}>Reset</button>
-        <button onClick={nextLevel}>Next Level</button>
-        <p>guess:{guesses.toString()} 
-        <br></br> current guess:{currentGuess}
-        <br></br>
-        level : {level}
-        <br></br> isWon:{isWon.toString()}</p>
+      <div className="Title">
+        <h1>Wordle</h1>
       </div>
+      <div className="Game">
+        <h3>Level {level}</h3>
       <Grid
-        maxTries={solution.length}
+        maxTries={solution.length + 1}
         solution={solution}
         guesses={guesses}
         currentGuess={currentGuess}
@@ -150,6 +130,7 @@ export default function App() {
       <LostModal isOpen={isLost} info={modalInfo} Action={newGame} />
       <AlertModal alert={alert} action={resetAlert} />
       <CompletionModal isOpen={isWon && level===5} info={modalInfo} Action={newGame} ></CompletionModal>
+      </div>
     </div>
   );
 }

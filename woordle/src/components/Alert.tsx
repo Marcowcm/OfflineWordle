@@ -16,7 +16,7 @@ export const AlertModal = ({ alert,action }: Props) => {
         <>
       <div className="modal container">
         {/* Content */}
-        <div className="modal-content">
+        <div className="modal-content alert">
           <h2>{alertContent[alert-1]}</h2>
           {/* Actions */}
           <button className="modal-action" onClick={action}>
