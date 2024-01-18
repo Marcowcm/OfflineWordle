@@ -7,7 +7,6 @@ type Props = {
   solution: string;
   guesses: string[];
   currentGuess: string;
-  isRevealing?: boolean;
   currentRowClassName: string;
 };
 
@@ -16,7 +15,6 @@ export const Grid = ({
   solution,
   guesses,
   currentGuess,
-  isRevealing,
   currentRowClassName,
 }: Props) => {
   const empties =

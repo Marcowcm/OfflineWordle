@@ -47,3 +47,27 @@ export const WinModal = ({ isOpen, info, Action }: Props) => {
     </>
   );
 };
+
+export const CompletionModal = ({ isOpen, info, Action }: Props) => {
+  if (!isOpen) {
+    return null;
+  }
+  return (
+    <>
+      <div className="modal container">
+        {/* Content */}
+        <div className="modal-content">
+          <h2>Most Impressive!</h2>
+          <p className="win-msg">The answer is {info.solution}</p>
+          <p className="win-msg">You took {info.guesses.length} tries.</p>
+          <p className="win-msg">You have finished all the levels.</p>
+          {/* Actions */}
+          <button className="modal-action" onClick={Action}>
+            Play Again
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};
+

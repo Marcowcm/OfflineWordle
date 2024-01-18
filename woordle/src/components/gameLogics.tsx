@@ -3,9 +3,9 @@ import { getWord , getWordOnline, isValidWord } from "./words";
 
 export const getStatus = (solution:string , guess:string) => {
   const ref = Array.from(solution.split(""));
-  console.log(ref);
+  //console.log(ref);
   const status = Array.from(guess.split(""));
-  console.log(status);
+  //console.log(status);
   
   guess.split("").map((letter, i) => {
     if (solution[i] === letter) {
@@ -53,6 +53,7 @@ export const getNewWord = (level: number) => {
   presentLetters = [""];
   absentLetters = [""];
   correctLetters = [""];
+  // return online ?  getWordOnline(level) :
   return getWord(level); 
 };
 

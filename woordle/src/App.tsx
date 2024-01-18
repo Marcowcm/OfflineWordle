@@ -3,19 +3,22 @@ import { useState, useEffect, useCallback } from "react";
 import { Grid } from "./components/grid/Grid";
 import { isValid, getNewWord } from "./components/gameLogics";
 import { Keyboard } from "./components/keyboard/Keyboard";
-import { WinModal, LostModal } from "./components/Modal";
+import { WinModal, LostModal,CompletionModal } from "./components/Modal";
+import { AlertModal } from "./components/Alert"
 // import { getWord } from "./components/words";
 
 export default function App() {
   const [level, setLevel] = useState(1);
-
+  //const [onlineMode, setOnlineMode] = useState(false);
+  const [alert,setAlert] = useState(0);
   const [solution, setSolution] = useState('LOREM');//getNewWord(level));
   const [guesses, setGuesses] = useState([] as string[]);
   const [currentGuess, setCurrentGuess] = useState("");
-  const [isRevealing, setIsRevealing] = useState(false);
+  
   const [currentRowClass, setCurrentRowClass] = useState("false");
   const [isWon, setIsWon] = useState(false);
   const [isLost, setIsLost] = useState(false);
+  
   // const [definition,setDefinition] = useState([""]);
   const modalInfo = {
     guesses: guesses,
@@ -29,28 +32,29 @@ export default function App() {
     ) {
       setCurrentGuess(`${currentGuess}${value}`);
     }
-  },
-    [guesses, currentGuess, solution],
-  );
+  },[currentGuess,solution,guesses]
+  )
+
   const onDelete = useCallback(() => {
     if (currentGuess.length > 0) {
       setCurrentGuess(currentGuess.substring(0, currentGuess.length - 1));
     }
   }, [currentGuess]);
+
   const onEnter = useCallback(() => {
     if (isWon || isLost) {
       return;
     }
-    if (isValid(level, currentGuess)) {
-      if (currentGuess.length === solution.length) {
-        /* guess is complete
-         if(WordList.include(currentGuess)){ //guess is an accepted word */
+    if (currentGuess.length === solution.length) {
+      // completed guess
+      if (isValid(level, currentGuess)) {
+        // Validword
         setGuesses(guesses.concat([currentGuess]));
         if (currentGuess === solution) {
           /* win */
           setCurrentGuess("");
           setIsWon(true);
-          setIsRevealing(true);
+          
           /* animation */
           //nextLevel();
         } else {
@@ -60,9 +64,13 @@ export default function App() {
             setIsLost(true);
           }
         }
+      }else{
+        setAlert(2); //invalid warning
       }
+    }else{
+      setAlert(1); // incomplete warning
     }
-  }, [level,guesses, currentGuess, isLost, isWon, solution]);
+  }, [level,guesses,currentGuess, isLost, isWon, solution]);
 
 
   // const getWordOnline = useCallback((level:number) => {
@@ -72,7 +80,7 @@ export default function App() {
   //     .catch(err => console.log(err));
   // }, [])
   
-  const newGame = useCallback(() => {
+  function newGame (){
     setLevel(1);
     setSolution(getNewWord(1));
     setGuesses([]);
@@ -80,11 +88,19 @@ export default function App() {
     setCurrentRowClass("false");
     setIsWon(false);
     setIsLost(false);
-  }, []);
+  };
   
-  const nextLevel = useCallback(() => {
-    setLevel(level + 1); 
-  }, [level]);
+  function nextLevel(){
+    setLevel(level + 1);
+    setIsWon(false);
+    setIsLost(false);
+    setCurrentGuess(""); 
+  };
+
+  const resetAlert = useCallback(()=> {
+    setAlert(0);
+  },[])
+
   /* keyListener */
   useEffect(() => {
     const listener = (e: KeyboardEvent) => {
@@ -100,15 +116,14 @@ export default function App() {
       }
     };
     window.addEventListener("keyup", listener);
-  }, [onChar, onDelete, onEnter]);
+  }, [onEnter,onDelete,onChar,currentGuess,solution]);
 
   /* onKeyPress KeyId keyValue */
   useEffect(() => {setSolution(getNewWord(level));
                   setGuesses([]);
                   setCurrentGuess("");
                   setCurrentRowClass("false");
-                  setIsWon(false);
-                  setIsLost(false);}, [level])
+                  }, [level])
   
   return (
     <div className="App">
@@ -116,22 +131,25 @@ export default function App() {
       <div>
         <button onClick={newGame}>Reset</button>
         <button onClick={nextLevel}>Next Level</button>
-        <p>guess:{guesses.toString()} <br></br> current guess:{currentGuess}
+        <p>guess:{guesses.toString()} 
+        <br></br> current guess:{currentGuess}
         <br></br>
-        level : {level}</p>
+        level : {level}
+        <br></br> isWon:{isWon.toString()}</p>
       </div>
       <Grid
         maxTries={solution.length}
         solution={solution}
         guesses={guesses}
         currentGuess={currentGuess}
-        isRevealing={isRevealing}
         currentRowClassName={currentRowClass}
       />
       <Keyboard onChar={onChar} onEnter={onEnter} onDelete={onDelete} />
 
-      <WinModal isOpen={isWon} info={modalInfo} Action={nextLevel} />
+      <WinModal isOpen={isWon && level<5 } info={modalInfo} Action={nextLevel} />
       <LostModal isOpen={isLost} info={modalInfo} Action={newGame} />
+      <AlertModal alert={alert} action={resetAlert} />
+      <CompletionModal isOpen={isWon && level===5} info={modalInfo} Action={newGame} ></CompletionModal>
     </div>
   );
 }
