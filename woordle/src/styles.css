@@ -7,16 +7,19 @@ main {
   font-family: sans-serif;
   text-align: center;
 }
-
+.grid .row{
+  margin: 1px;
+}
 .cell {
-  width: 40px;
-  height: 40px;
+  width: 8vmin;
+  height: 8vmin;
+  font-size: 5vmin;
   background-color: white;
   color: black;
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin: 3px;
+  margin: 2px;
   border: darkgray 1px solid;
   border-radius: 3px;
   display: inline-flex;
@@ -25,10 +28,6 @@ main {
   justify-content: center;
   align-items: center;
   display: grid;
-}
-.row {
-  display: flex;
-  flex-direction: row;
 }
 .absent {
   background-color: darkgray;
@@ -43,31 +42,41 @@ main {
   background-color: rgb(255, 196, 1);
   color: white;
 }
-.container {
+
+.keyboard .row{
   justify-content: center;
   align-items: center;
+  margin: 1vmin;
 }
-.keyboard {
+.keyboard{
   justify-content: center;
   align-items: center;
-  margin: 5px;
+  margin: 0px;
+  border-radius:20% 20% 4vmin 4vmin;
 }
-.keyboard .row {
+.flexbox {
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
 .keyboard button.key {
-  font-size: 20pt;
-  height: 30pt;
-  min-width: 30pt;
+  font-size: 6vmin;
+  height: 8vmin;
+  min-width: 8vmin;
   background-color: white;
   color: black;
   align-items: center;
   justify-content: center;
   text-align: center;
   border: darkgray 1px solid;
-  border-radius: 3px;
-  display: inline-flex;
+  border-radius: 4vmin;
+}
+.keyboard button.key i{
+  font-size: 4vmin;
+  width: 12vmin;
+  justify-content: center;
+  text-align: center;
 }
 .keyboard button.key.absent {
   background-color: darkgray;
@@ -86,7 +95,7 @@ main {
   color: black;
 }
 
-.modal {
+.message {
   display: true; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -98,7 +107,7 @@ main {
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
-.modal-content {
+.message-content {
   background-color: #fefefe;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 10px;
@@ -106,7 +115,7 @@ main {
   width: 80%; /* Could be more or less, depending on screen size */
   border-radius: 5px;
 }
-.modal-action {
+.message-action {
   color: #666;
   background-color: rgba(0, 0, 0, 0);
   /* float: inline-end; */
@@ -117,8 +126,8 @@ main {
   border-radius: 5px;
 }
 
-.modal-action:hover,
-.modal-action:focus {
+.message-action:hover,
+.message-action:focus {
   color: black;
   background-color: rgba(0, 0, 0, 0.2);
   border: 1px solid black;

@@ -7,19 +7,19 @@ const alertContent = ["Word is incomplete.",
                         "Lorem Ipsum"]
 
 
-export const AlertModal = ({ alert,action }: Props) => {
+export const AlertMessage = ({ alert,action }: Props) => {
   if (alert === 0)  {
     return null
   }
   else{
     return(
         <>
-      <div className="modal container">
+      <div className="message container">
         {/* Content */}
-        <div className="modal-content alert">
+        <div className="message-content alert">
           <h2>{alertContent[alert-1]}</h2>
           {/* Actions */}
-          <button className="modal-action" onClick={action}>
+          <button className="message-action" onClick={action}>
             Close
           </button>
         </div>

@@ -7,7 +7,6 @@ type Props = {
   solution: string;
   guesses: string[];
   currentGuess: string;
-  currentRowClassName: string;
 };
 
 export const Grid = ({
@@ -15,7 +14,6 @@ export const Grid = ({
   solution,
   guesses,
   currentGuess,
-  currentRowClassName,
 }: Props) => {
   const empties =
     guesses.length < maxTries - 1

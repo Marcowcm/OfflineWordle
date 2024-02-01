@@ -3,8 +3,8 @@ import { useState, useEffect, useCallback } from "react";
 import { Grid } from "./components/grid/Grid";
 import { isValid, getNewWord } from "./components/gameLogics";
 import { Keyboard } from "./components/keyboard/Keyboard";
-import { WinModal, LostModal,CompletionModal } from "./components/Modal";
-import { AlertModal } from "./components/Alert"
+import { WinMessage, LostMessage,CompletionMessage } from "./components/Message";
+import { AlertMessage } from "./components/Alert"
 // import { getWord } from "./components/words";
 
 export default function App() {
@@ -15,12 +15,12 @@ export default function App() {
   const [guesses, setGuesses] = useState([] as string[]);
   const [currentGuess, setCurrentGuess] = useState("");
   
-  const [currentRowClass, setCurrentRowClass] = useState("false");
+  
   const [isWon, setIsWon] = useState(false);
   const [isLost, setIsLost] = useState(false);
   
   // const [definition,setDefinition] = useState([""]);
-  const modalInfo = {
+  const messageInfo = {
     guesses: guesses,
     solution: solution,
   };
@@ -42,14 +42,16 @@ export default function App() {
   }, [currentGuess]);
 
   const onEnter = useCallback(() => {
-    console.log('OnEnter guess:'+currentGuess);
+    
     if (isWon || isLost) {
       return;
     }
     if (currentGuess.length === solution.length) {
       // completed guess
+      console.log("length okay");
       if (isValid(level, currentGuess)) {
         // Validword
+        console.log("valid word");
         setGuesses(guesses.concat([currentGuess]));
         if (currentGuess === solution) {
           /* win */
@@ -66,27 +68,19 @@ export default function App() {
           }
         }
       }else{
+        console.log("not valid");
         setAlert(2); //invalid warning
       }
     }else{
       setAlert(1); // incomplete warning
     }
   }, [level,guesses,currentGuess, isLost, isWon, solution]);
-
-
-  // const getWordOnline = useCallback((level:number) => {
-  //   fetch(`https://random-word-api.herokuapp.com/word?length=${level + 4}`)
-  //     .then(Response => Response.json())
-  //     .then(res => setSolution(res[0].toUpperCase()))
-  //     .catch(err => console.log(err));
-  // }, [])
   
   function newGame (){
     setLevel(1);
     setSolution(getNewWord(1));
     setGuesses([]);
     setCurrentGuess("");
-    setCurrentRowClass("false");
     setIsWon(false);
     setIsLost(false);
   };
@@ -107,29 +101,29 @@ export default function App() {
   useEffect(() => {setSolution(getNewWord(level));
                   setGuesses([]);
                   setCurrentGuess("");
-                  setCurrentRowClass("false");
                   }, [level])
   
   return (
     <div className="App">
-      <div className="Title">
-        <h1>Wordle</h1>
-      </div>
+      <nav className="green">
+        <div className="Title">
+          <span className="brand-logo center white-text">Random Word Wordle</span>
+        </div>
+      </nav>
       <div className="Game">
-        <h3>Level {level}</h3>
+        <h4>Level {level}</h4>
       <Grid
         maxTries={solution.length + 1}
         solution={solution}
         guesses={guesses}
         currentGuess={currentGuess}
-        currentRowClassName={currentRowClass}
       />
       <Keyboard onChar={onChar} onEnter={onEnter} onDelete={onDelete} />
 
-      <WinModal isOpen={isWon && level<5 } info={modalInfo} Action={nextLevel} />
-      <LostModal isOpen={isLost} info={modalInfo} Action={newGame} />
-      <AlertModal alert={alert} action={resetAlert} />
-      <CompletionModal isOpen={isWon && level===5} info={modalInfo} Action={newGame} ></CompletionModal>
+      <WinMessage isOpen={isWon && level<5 } info={messageInfo} Action={nextLevel} />
+      <LostMessage isOpen={isLost} info={messageInfo} Action={newGame} />
+      <AlertMessage alert={alert} action={resetAlert} />
+      <CompletionMessage isOpen={isWon && level===5} info={messageInfo} Action={newGame} ></CompletionMessage>
       </div>
     </div>
   );

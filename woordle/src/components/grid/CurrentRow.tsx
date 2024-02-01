@@ -10,12 +10,12 @@ export const CurrentRow = ({ solution, guess }: Props) => {
   const empties = Array.from(Array(solution.length - guess.length));
 
   return (
-    <div className="mb-1 row flex justify-center">
+    <div className="row flex justify-center">
       {letters.map((letter, i) => (
-        <Cell value={letter} key={i} />
+        <Cell value={letter} status="" key={i} />
       ))}
       {empties.map((i) => (
-        <Cell key={i} />
+        <Cell  value="" status="" key={i} />
       ))}
     </div>
   );

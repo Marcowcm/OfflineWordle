@@ -3,21 +3,20 @@
 type Props = {
   value?: string;
   status?: string;
-  isRevealing?: boolean;
-  isCompleted?: boolean;
-  position?: number;
+  key:number;
 };
 export const Cell = ({
   value,
   status,
+  key,
 }: Props) => {
   
-  const className = "cell " + status;
+  const className = "cell col " + status;
   return (
-    <div>
-      <div className={className} id="{key}">
+    
+      <div className={className} id={String(key)}>
         {value}{" "}
       </div>
-    </div>
+    
   );
 };

@@ -37,24 +37,26 @@ export const Keyboard = ({ onChar, onEnter, onDelete }: Props) => {
     }
   }, [onEnter,onDelete,onChar]);
   return (
-    <div className="keyboard">
+    <div className="keyboard container grey lighten-3">
       
-      <div className="row">
+      <div className="row center-align flexbox">
         {"QWERTYUIOP".split("").map((letter) => (
-          <Key value={letter} onClick={onClick} status={letterState(letter)} />
+          <Key key={letter} value={letter} onClick={onClick} status={letterState(letter)} />
         ))}
       </div>
-      <div className="row">
+      <div className="row flexbox">
         {"ASDFGHJKL".split("").map((letter) => (
-          <Key value={letter} onClick={onClick} status={letterState(letter)} />
+          <Key key={letter} value={letter} onClick={onClick} status={letterState(letter)} />
         ))}
-        <Key value="ENTER" onClick={onClick} status="default" />
+        
       </div>
-      <div className="row">
+      <div className="row flexbox">
+      <Key value="<--" onClick={onClick} status="default" />
         {"ZXCVBNM".split("").map((letter) => (
-          <Key value={letter} onClick={onClick} status={letterState(letter)} />
+          <Key key={letter} value={letter} onClick={onClick} status={letterState(letter)} />
         ))}
-        <Key value="<--" onClick={onClick} status="default" />
+        
+        <Key key="Enter" value="ENTER" onClick={onClick} status="default" />
       </div>
     </div>
   );
