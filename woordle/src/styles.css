@@ -56,12 +56,13 @@ main {
 }
 .flexbox {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
 }
 .keyboard button.key {
-  font-size: 6vmin;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 5vmin;
   height: 8vmin;
   min-width: 8vmin;
   background-color: white;

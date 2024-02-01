@@ -107,7 +107,7 @@ export default function App() {
     <div className="App">
       <nav className="green">
         <div className="Title">
-          <span className="brand-logo center white-text">Random Word Wordle</span>
+          <span className="brand-logo center white-text">Randle</span>
         </div>
       </nav>
       <div className="Game">
