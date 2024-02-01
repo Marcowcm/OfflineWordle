@@ -11,7 +11,7 @@ export const Key = ({ value, onClick, status }: Props) => {
   const className = "key " + status;
   return (
     <button onClick={clickHandler} className={className}>
-      {value}
+      {value="ENTER"? "<-" : value}
     </button>
   );
 };
