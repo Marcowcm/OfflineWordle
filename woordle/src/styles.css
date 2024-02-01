@@ -68,16 +68,19 @@ main {
   background-color: white;
   color: black;
   align-items: center;
+  vertical-align: middle;
   justify-content: center;
   text-align: center;
   border: darkgray 1px solid;
   border-radius: 4vmin;
 }
 .keyboard button.key i{
-  font-size: 4vmin;
+  font-size: 5vmin;
   width: 12vmin;
   justify-content: center;
   text-align: center;
+  align-items: center;
+  vertical-align: middle;
 }
 .keyboard button.key.absent {
   background-color: darkgray;
