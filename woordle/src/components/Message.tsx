@@ -32,7 +32,7 @@ export const WinMessage = ({ isOpen, info, Action }: Props) => {
   }
   return (
     <>
-      <div className="message container">
+      <div className="message section">
         {/* Content */}
         <div className="message-content">
           <h2>Nice Work!</h2>

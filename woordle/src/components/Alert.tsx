@@ -14,7 +14,7 @@ export const AlertMessage = ({ alert,action }: Props) => {
   else{
     return(
         <>
-      <div className="message container">
+      <div className="message section">
         {/* Content */}
         <div className="message-content alert">
           <h2>{alertContent[alert-1]}</h2>
